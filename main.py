@@ -4,8 +4,7 @@ from model import *
 
 def main():
     # Options for manual settings
-    # If you use manual settings, make sure to specify
-    # on creation of the Experiment
+    # If you use manual settings, make sure to specify on Experiment creation
     # By default, automatic settings are used
     n = 500
     k = 5
@@ -34,7 +33,7 @@ def main():
 
 
     # Plots the experiment
-    # If multiple experiments were run, plots the last one
+    # If multiple experiments or iterations were run, plots the last one
     experiment.plot()
 
 
