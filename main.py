@@ -10,7 +10,7 @@ def main():
     n = 500
     k = 5
     f = 0.0
-    triangle = Triangle(Point(3, 3), Point(7, 3), Point(7, 7)),
+    triangle: Triangle = Triangle(Point(3, 3), Point(7, 3), Point(7, 7))
     manualSettings = ManualSettings(n, k, f, triangle)
 
 
