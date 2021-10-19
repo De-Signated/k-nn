@@ -20,39 +20,40 @@ class Experiment:
     # Prints mean and st. dev
     # Updates the settings and runs again if need be
     def run(self, iterations=20):
-        # Mean and st. deviation of the experiment
-        total: List[int] = []
-        mu: float
-        sigma: float
-
         print('Experiment ', self.sett.expno, 'with settings ', self.sett.printset())
         print('running ', iterations, ' iterations')
 
+
+        total: List[int] = []
+        # Iterate and run the experiment X times, with a fresh dataset every time
         for i in range(iterations):
-            total.append(self.run_once())
+            total.append(self.iterate_once())
             print('finished iteration ', i)
 
+        # Calculate and print the mean and st. dev over X iterations
         mu = mean(total)
         sigma = stdev(total)
-
         print('\u03BC= ', mu)
         print('\u03C3= ', sigma)
 
+        # Continue automatically with the next set of settings, if enabled
         if self.sett.autocontinue:
             if self.sett.next():
                 self.run(iterations)
 
     # Run the experiment with the provided settings
-    def run_once(self):
+    def iterate_once(self):
+        # Create the pointset over which this iteration will run
         self.create_points()
-        results: List[bool] = []
+        false_count: int = 0
 
+        # Perform k-NN over ten thousand points
         for i in range(10000):
             point: FeatureVec = self.create_random()
-            bool: bool = self.k_nn_is_red(point) == (point.col == 'ro')
-            results.append(bool)
+            if self.k_nn_is_red(point) != (point.col == 'ro'):
+                # Add one to the count if the point was misclassified
+                false_count += 1
 
-        false_count: int = 10000 - sum(results)
         return false_count
 
     # Performs K-NN classification over the specified point
