@@ -32,6 +32,9 @@ class Triangle:
         y = [self.a.y, self.b.y, self.c.y, self.a.y]
         plt.plot(x, y)
 
+    def printset(self):
+        return 'triangle = ', self.a, ', ', self.b, ', ', self.c
+
 
 class FeatureVec:
     point: Point

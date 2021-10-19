@@ -1,9 +1,93 @@
-from typing import List, TYPE_CHECKING
+from typing import List
 from model import Triangle, Point, FeatureVec
+from abc import abstractmethod
+
+class Settings:
+    expno: int
+    n: int
+    k: int
+    f: float
+    triangle:Triangle
+    autocontinue: bool
+
+    @abstractmethod
+    def next(self):
+        pass
+
+    def printset(self):
+        return f'n = {self.n}; k = {self.k}; f = {self.f}\n' \
+                 f'{self.triangle.printset()}'
+
+class ManualSettings(Settings):
+
+    def __init__(self, n: int, k: int, f: float, t: Triangle):
+        self.expno = 0
+        self.autocontinue = False
+        self.n = n
+        self.k = k
+        self.f = f
+        self.triangle = t
 
 
-n = 500
-k = 5
-f = 0
-triangle: Triangle = Triangle(Point(3,3), Point(7,3), Point(7,7))
-points: List[FeatureVec] = []
+    def next(self):
+        return False
+
+    def printset(self):
+        return 'Manual: ' + super().printset()
+
+
+
+class AutoSettings(Settings):
+    ns: List[int] = [100, 200, 300, 400, 500, 600, 700, 800]
+    fs: List[float] = [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3]
+    ts: List[Triangle] = [Triangle(Point(3, 3), Point(7, 3), Point(7, 7)),
+                          Triangle(Point(3, 3), Point(7, 3), Point(7, 7)),
+                          Triangle(Point(3, 3), Point(7, 3), Point(7, 7)),
+                          Triangle(Point(3, 3), Point(7, 3), Point(7, 7)),
+                          Triangle(Point(3, 3), Point(7, 3), Point(7, 7)),
+                          Triangle(Point(3, 3), Point(7, 3), Point(7, 7)),
+                          Triangle(Point(3, 3), Point(7, 3), Point(7, 7)),
+                          Triangle(Point(3, 3), Point(7, 3), Point(7, 7)),
+                          Triangle(Point(3, 3), Point(7, 3), Point(7, 7))]
+
+    def __init__(self, expno:int):
+        self.expno = expno
+        self.k = 5
+        self.autocontinue = True
+
+        if expno == 1:
+            self.n = self.ns.pop(0)
+            self.f = 0.0
+            self.triangle = Triangle(Point(3, 3), Point(7, 3), Point(7, 7))
+
+        elif expno == 2:
+            self.n = 500
+            self.f = self.fs.pop(0)
+            self.triangle = Triangle(Point(3, 3), Point(7, 3), Point(7, 7))
+
+        elif expno == 3:
+            self.n = 500
+            self.f = 0.0
+            self.triangle = self.ts.pop(0)
+
+    def next(self):
+        if self.expno == 1:
+            if self.ns:
+                self.n = self.ns.pop(0)
+                return True
+            else: return False
+
+        elif self.expno == 2:
+            if self.fs:
+                self.f = self.fs.pop(0)
+                return True
+            else: return False
+
+        elif self.expno == 3:
+            if self.ts:
+                self.triangle = self.ts.pop(0)
+                return True
+            else: return False
+
+    def printset(self):
+        return 'Auto: ' + super().printset()

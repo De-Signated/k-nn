@@ -1,69 +1,42 @@
-from matplotlib import pyplot as plt
-import numpy as np
-from math import sqrt
-
-from settings import *
+from Experiment import Experiment
+from settings import ManualSettings, AutoSettings
 from model import *
 
-
 def main():
-    init_plot()
-    results: List[bool] = []
-
-    for i in range(10000):
-        #generate a random point
-        x = np.random.uniform(0, 10)
-        y = np.random.uniform(0, 10)
-
-        point: FeatureVec = FeatureVec(x,y,triangle,0)
-
-        #perform k-NN
-        isRed: bool = k_nn(point)
-
-        results.append(isRed == (point.col == 'ro'))
-
-    false_count: int = 10000 - sum(results)
-    print(false_count)
+    # Options for manual settings
+    # If you use manual settings, make sure to specify
+    # on creation of the Experiment
+    # By default, automatic settings are used
+    n = 500
+    k = 5
+    f = 0.0
+    triangle = Triangle(Point(3, 3), Point(7, 3), Point(7, 7)),
+    manualSettings = ManualSettings(n, k, f, triangle)
 
 
-def init_plot():
-
-    triangle.plot(plt)
-
-    for i in range(n):
-        x = np.random.uniform(0, 10)
-        y = np.random.uniform(0, 10)
-        point: FeatureVec = FeatureVec(x, y, triangle, f)
-        points.append(point)
-        point.plot(plt)
-
-    plt.xlim([0, 10])
-    plt.ylim([0, 10])
-    plt.show()
+    # Options for automatic settings
+    # This number denotes which experiment is being carried out,
+    # either 1, 2, or 3
+    # These settings are automatically updated depending on the experiment number
+    # and re-run the experiment until all options are exhausted
+    # See settings.py for the lists of these experiment settings
+    expNo = 1
+    autoSettings = AutoSettings(expNo)
 
 
-#returns true if the point is red, and false otherwise
-def k_nn(point: FeatureVec):
-    distances: List[(FeatureVec, int)] = []
+    # Make sure to specify the right settings with which to run the experiment!
+    experiment: Experiment = Experiment(autoSettings)
 
-    for fv in points:
-        euclid: float = sqrt((fv.point.x - point.point.x) ** 2 + (fv.point.y - point.point.y) ** 2)
-        distances.append((fv, euclid))
 
-    distances.sort(key=lambda tup: tup[1])
-    red: int = 0
-    blue: int = 0
+    # Integer argument defines how often each experiment is repeated
+    # to obtain the mean and st. dev.  Default = 20
+    experiment.run(20)
 
-    for i in range(5):
-        q: (FeatureVec, int) = distances[i]
-        p: FeatureVec = q[0]
 
-        if p.col == 'ro':
-            red += 1
-        elif p.col == 'bo':
-            blue += 1
+    # Plots the experiment
+    # If multiple experiments were run, plots the last one
+    experiment.plot()
 
-    return red > blue
 
 if __name__ == "__main__":
     main()
