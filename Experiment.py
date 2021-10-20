@@ -23,7 +23,6 @@ class Experiment:
         print('Experiment ', self.sett.expno, 'with settings ', self.sett.printset())
         print('running ', iterations, ' iterations')
 
-
         total: List[int] = []
 
         def process(i):
