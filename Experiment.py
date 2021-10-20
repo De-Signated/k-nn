@@ -4,7 +4,7 @@ from statistics import mean, stdev
 from typing import List
 from model import Triangle, Point, FeatureVec
 from settings import Settings
-
+from joblib import Parallel, delayed
 
 class Experiment:
     sett: Settings
@@ -25,10 +25,14 @@ class Experiment:
 
 
         total: List[int] = []
-        # Iterate and run the experiment X times, with a fresh dataset every time
-        for i in range(iterations):
-            total.append(self.iterate_once())
+
+        def process(i):
+            errors = self.iterate_once()
             print('finished iteration ', i)
+            return errors
+        
+        # Iterate and run the experiment X times, with a fresh dataset every time
+        total = Parallel(n_jobs=4)(delayed(process)(i) for i in range(iterations))
 
         # Calculate and print the mean and st. dev over X iterations
         mu = mean(total)
