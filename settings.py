@@ -46,14 +46,14 @@ class AutoSettings(Settings):
     ns: List[int] = [100, 200, 300, 400, 500, 600, 700, 800]
     fs: List[float] = [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3]
     ts: List[Triangle] = [Triangle(Point(3, 3), Point(7, 3), Point(7, 7)),
-                          Triangle(Point(3, 3), Point(7, 3), Point(7, 7)),
-                          Triangle(Point(3, 3), Point(7, 3), Point(7, 7)),
-                          Triangle(Point(3, 3), Point(7, 3), Point(7, 7)),
-                          Triangle(Point(3, 3), Point(7, 3), Point(7, 7)),
-                          Triangle(Point(3, 3), Point(7, 3), Point(7, 7)),
-                          Triangle(Point(3, 3), Point(7, 3), Point(7, 7)),
-                          Triangle(Point(3, 3), Point(7, 3), Point(7, 7)),
-                          Triangle(Point(3, 3), Point(7, 3), Point(7, 7))]
+                          Triangle(Point(3, 3), Point(7, 3), Point(7, 8)),
+                          Triangle(Point(3, 3), Point(7, 3), Point(7, 9)),
+                          Triangle(Point(3, 2), Point(7, 2), Point(7, 7)),
+                          Triangle(Point(3, 2), Point(7, 2), Point(7, 8)),
+                          Triangle(Point(3, 2), Point(7, 2), Point(7, 9)),
+                          Triangle(Point(3, 1), Point(7, 1), Point(7, 7)),
+                          Triangle(Point(3, 1), Point(7, 1), Point(7, 8)),
+                          Triangle(Point(3, 1), Point(7, 1), Point(7, 9))]
 
 
     # Values are initiated as either default values, or the first item in the respective list
@@ -62,20 +62,17 @@ class AutoSettings(Settings):
         self.expno = expno
         self.k = 5
         self.autocontinue = True
+        self.n = 500
+        self.f = 0.0
+        self.triangle = Triangle(Point(3, 3), Point(7, 3), Point(7, 7))
 
         if expno == 1:
             self.n = self.ns.pop(0)
-            self.f = 0.0
-            self.triangle = Triangle(Point(3, 3), Point(7, 3), Point(7, 7))
 
         elif expno == 2:
-            self.n = 500
             self.f = self.fs.pop(0)
-            self.triangle = Triangle(Point(3, 3), Point(7, 3), Point(7, 7))
 
         elif expno == 3:
-            self.n = 500
-            self.f = 0.0
             self.triangle = self.ts.pop(0)
 
 

@@ -19,7 +19,7 @@ def main():
     # These settings are automatically updated depending on the experiment number
     # and re-run the experiment until all options are exhausted
     # See settings.py for the lists of these experiment settings
-    expNo = 1
+    expNo = 3
     autoSettings = AutoSettings(expNo)
 
 

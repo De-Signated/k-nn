@@ -74,7 +74,7 @@ class Experiment:
 
         # check the first k items and count how many reds vs blues there are
         for i in range(self.sett.k):
-            q: (FeatureVec, int) = distances[i]
+            q: tuple(FeatureVec, int) = distances[i]
             p: FeatureVec = q[0]
 
             if p.col == 'ro':
