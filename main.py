@@ -24,12 +24,12 @@ def main():
 
 
     # Make sure to specify the right settings with which to run the experiment!
-    experiment: Experiment = Experiment(manualSettings)
+    experiment: Experiment = Experiment(autoSettings)
 
 
     # Integer argument defines how often each experiment is repeated
     # to obtain the mean and st. dev.  Default = 20
-    experiment.run(2)
+    experiment.run(20)
 
 
     # Plots the experiment

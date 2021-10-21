@@ -45,15 +45,15 @@ class AutoSettings(Settings):
     # to facilitate automatic continuation
     ns: List[int] = [100, 200, 300, 400, 500, 600, 700, 800]
     fs: List[float] = [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3]
-    ts: List[Triangle] =   [Triangle(Point(3, 3), Point(7, 3), Point(7, 7)),
-                            Triangle(Point(3, 3), Point(7, 3), Point(8, 7)),
-                            Triangle(Point(3, 3), Point(7, 3), Point(9, 7)),
-                            Triangle(Point(2, 3), Point(6, 3), Point(7, 7)),
-                            Triangle(Point(2, 3), Point(6, 3), Point(8, 7)),
-                            Triangle(Point(2, 3), Point(6, 3), Point(9, 7)),
-                            Triangle(Point(1, 3), Point(5, 3), Point(7, 7)),
-                            Triangle(Point(1, 3), Point(5, 3), Point(8, 7)),
-                            Triangle(Point(1, 3), Point(5, 3), Point(9, 7))]
+    ts: List[Triangle] = [Triangle(Point(3, 3), Point(7, 3), Point(7, 7)),
+                          Triangle(Point(3, 3), Point(7, 3), Point(8, 7)),
+                          Triangle(Point(3, 3), Point(7, 3), Point(9, 7)),
+                          Triangle(Point(2, 3), Point(6, 3), Point(7, 7)),
+                          Triangle(Point(2, 3), Point(6, 3), Point(8, 7)),
+                          Triangle(Point(2, 3), Point(6, 3), Point(9, 7)),
+                          Triangle(Point(1, 3), Point(5, 3), Point(7, 7)),
+                          Triangle(Point(1, 3), Point(5, 3), Point(8, 7)),
+                          Triangle(Point(1, 3), Point(5, 3), Point(9, 7))]
 
 
     # Values are initiated as either default values, or the first item in the respective list
