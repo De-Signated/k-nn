@@ -19,17 +19,17 @@ def main():
     # These settings are automatically updated depending on the experiment number
     # and re-run the experiment until all options are exhausted
     # See settings.py for the lists of these experiment settings
-    expNo = 3
+    expNo = 1
     autoSettings = AutoSettings(expNo)
 
 
     # Make sure to specify the right settings with which to run the experiment!
-    experiment: Experiment = Experiment(autoSettings)
+    experiment: Experiment = Experiment(manualSettings)
 
 
     # Integer argument defines how often each experiment is repeated
     # to obtain the mean and st. dev.  Default = 20
-    experiment.run(20)
+    experiment.run(2)
 
 
     # Plots the experiment
