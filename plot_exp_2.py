@@ -13,7 +13,7 @@ y_err = [37.10, 42.16, 92.11, 111.38, 199.47, 216.84, 273.92]
 # create figure
 fig, ax = plt.subplots()
 
-# create error including line
+# create error bar including line
 ax.errorbar(x, y, yerr=y_err, fmt='-o')
 
 # set labels etc.
