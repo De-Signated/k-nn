@@ -23,16 +23,19 @@ class Experiment:
         print('Experiment ', self.sett.expno, 'with settings ', self.sett.printset())
         print('running ', iterations, ' iterations')
 
-
         total: List[int] = []
         # Iterate and run the experiment X times, with a fresh dataset every time
+
+        # total = Parallel(n_jobs=4)(delayed(process)(i) for i in range(iterations))
+
         for i in range(iterations):
             total.append(self.iterate_once())
             print('finished iteration ', i)
 
-        # Calculate and print the mean and st. dev over X iterations
+            # Calculate and print the mean and st. dev over X iterations
         mu = mean(total)
         sigma = stdev(total)
+        print('total= ', total)
         print('\u03BC= ', mu)
         print('\u03C3= ', sigma)
 
