@@ -19,6 +19,5 @@ ax.errorbar(x, y, yerr=y_err, fmt='-o')
 # set labels etc.
 ax.set_xlabel('Fraction of outliers (f)')
 ax.set_ylabel('Average misclassification')
-ax.set_title('Experiment 2')
 
 plt.show()
